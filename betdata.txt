@@ -1,0 +1,1 @@
+Strategy,Starting Funds,Target Funds,Color,Wins,Losses,Total Rounds,Ending Funds

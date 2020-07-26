@@ -16,31 +16,37 @@ def Gamble():
         print ("it broke")
         return 0
 
-def Mart(color, target, funds):
+def Mart(pasang,color, target, funds):
     stratg = "Martingale"
     start = funds
     win = 0
     loss = 0
     rounds = 0
-    bet = 10
+    bet = pasang
     while ((funds < target) and (funds > 0)):
         if color != Gamble():
+            print(funds)
+            print(bet)
             funds -= bet
             bet *= 2
             loss += 1
             rounds += 1
-            print ("lost! increasing bet ($" + str(funds) + ")")
+            print ("kalah , naikin pasangan ($" + str(bet) + ")")
         else:
+            print(funds)
+            print(bet)
             funds += bet
             win += 1
             rounds += 1
-            print ("won! same bet ($" + str(funds) + ")")
+            bet=pasang
+            print ("menang , turunin pasangan ($" + str(bet) + ")")
     if funds >= target:
-        print ("won a total of " + str(funds))
-        d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
+        print ("menang , total duit = " + str(funds))
+        print ("total ronde =  " + str(rounds))
+        # d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
     else:
-        print ("bankrupt! Now at " + str(funds))
-        d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
+        print ("bangrut! uang sekarang = " + str(funds))
+        # d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
     
 def AntiMart(color, target, funds):
     stratg = "Anti-Martingale"
@@ -105,11 +111,11 @@ def Oscar(color, target, funds):
                 bet = abs(cycleProfit) + betUnit
                 print ("won! bet set for positive unit profit for cycle ($" + str(funds) + ")")
     if funds >= target:
-        print ("won a total of " + str(funds))
-        d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
+        print ("won a total of " + str(funds)+ "")
+        # d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
     else:
         print ("bankrupt! Now at " + str(funds))
-        d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
+        # d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
         
 def Labouche(color, target, funds):
     stratg = "Labouchere"
@@ -156,16 +162,24 @@ def Labouche(color, target, funds):
         d.write(stratg + "," + str(start) + "," + str(target) + "," + str(color) + "," + str(win) + "," + str(loss) + "," + str(rounds) + "," + str(funds) + "\n")
     
     
-while True:
-    response = input('\nMethod? : ')
-    if (response == 'mart'):
-        Mart(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
-    elif (response == 'antimart'):
-        AntiMart(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
-    elif (response == 'labouche'):
-        Labouche(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
-    elif (response == 'oscar'):
-        Oscar(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
-    else:
-        d.close()
-        break
+# while True:
+# response = input('\nMethod? : ')
+response = "mart"
+color = "red"
+uang_target = 2000
+uang_mulai = 1000 
+pasang_uang = 10
+if (response == 'mart'):
+    # Mart(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
+    Mart(int(pasang_uang),str(color), int(uang_target), int(uang_mulai))
+elif (response == 'antimart'):
+    # AntiMart(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
+    AntiMart(int(pasang_uang),color, int(uang_target), int(uang_mulai))
+elif (response == 'labouche'):
+    # Labouche(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
+    Labouche(int(pasang_uang),color, int(uang_target), int(uang_mulai))
+elif (response == 'oscar'):
+    # Oscar(str(input('color: ')), int(input('target: ')), int(input('funds: ')))
+    Oscar(int(pasang_uang),color, int(uang_target), int(uang_mulai))
+else:
+    d.close()
