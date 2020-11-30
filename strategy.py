@@ -16,6 +16,9 @@ def Gamble():
         print ("it broke")
         return 0
 
+
+
+
 def Mart(pasang,color, target, funds):
     stratg = "Martingale"
     start = funds
